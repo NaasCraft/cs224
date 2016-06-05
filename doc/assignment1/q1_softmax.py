@@ -1,7 +1,7 @@
 import numpy as np
 import random
 
-def softmax(x):
+def softmax(matrix):
     """
     Compute the softmax function for each row of the input x.
 
@@ -20,11 +20,20 @@ def softmax(x):
     written assignment!
     """
 
-    ### YOUR CODE HERE
-    raise NotImplementedError
-    ### END YOUR CODE
+    N, d = matrix.shape
     
-    return x
+    SMax = np.zeros(matrix.shape, dtype=np.float32)
+    
+    for k in xrange(0,N):
+        x = matrix[k,]
+        c = -np.amax(x)
+        y = np.exp(x-c)
+        Sy = np.sum(y)
+        
+        for i in xrange(0,d):
+            SMax[k,i] = y[i] / Sy
+    
+    return SMax
 
 def test_softmax_basic():
     """
