@@ -5,11 +5,9 @@ def sigmoid(x):
     Compute the sigmoid function for the input here.
     """
     
-    ### YOUR CODE HERE
-    raise NotImplementedError
-    ### END YOUR CODE
+    result = 1. / (1+np.exp(-x))
     
-    return x
+    return result
 
 def sigmoid_grad(f):
     """
@@ -18,11 +16,9 @@ def sigmoid_grad(f):
     function value of your original input x. 
     """
     
-    ### YOUR CODE HERE
-    raise NotImplementedError
-    ### END YOUR CODE
+    result = f * (1-f)
     
-    return f
+    return result
 
 def test_sigmoid_basic():
     """

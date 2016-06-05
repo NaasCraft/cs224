@@ -22,9 +22,16 @@ def gradcheck_naive(f, x):
         ### try modifying x[ix] with h defined above to compute numerical gradients
         ### make sure you call random.setstate(rndstate) before calling f(x) each time, this will make it 
         ### possible to test cost functions with built in randomness later
-        ### YOUR CODE HERE:
-        raise NotImplementedError
-        ### END YOUR CODE
+        
+        # replace with return to avoid side effects
+        x[ix] += h # increment by h
+        random.setstate(rndstate)  
+        fxh, _ = f(x) # evalute f(x + h)
+        x[ix] -= 2 * h # restore to previous value (very important!)
+        random.setstate(rndstate)  
+        fxnh, _ = f(x)
+        x[ix] += h
+        numgrad = (fxh - fxnh) / 2 / h
 
         # Compare gradients
         reldiff = abs(numgrad - grad[ix]) / max(1, abs(numgrad), abs(grad[ix]))
